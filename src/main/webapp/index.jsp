@@ -361,42 +361,37 @@
                 'content' : content
             };
 
-
-
-
-
-            /*
             $.ajax({
-                url: "resetServlet",
+                url: "",
                 data: d,
                 success: function (data, textStatus, jqXHR) {
 //                                                            alert(data)
                     if (data.trim() === "not exist")
                     {
-                        swal({
-                            title: "Failed",
-                            text: "Email doesn't Exist!! Plase provide correct email.",
-                            icon: "error",
-                            button: "Close",
-                        });
+                        // swal({
+                        //     title: "Failed",
+                        //     text: "Email doesn't Exist!! Plase provide correct email.",
+                        //     icon: "error",
+                        //     button: "Close",
+                        // });
                     } else if (data.trim() === "Failed")
                     {
-                        swal({
-                            title: "Failed",
-                            text: "Something Went Wrong!! Plase try gain after sometime.",
-                            icon: "error",
-                            button: "Close",
-                        });
+                        // swal({
+                        //     title: "Failed",
+                        //     text: "Something Went Wrong!! Plase try gain after sometime.",
+                        //     icon: "error",
+                        //     button: "Close",
+                        // });
                     } else if (data.trim() === "Success")
                     {
-                        swal({
-                            title: "Success",
-                            text: "Hurray!! Password got reset",
-                            icon: "success",
-                            button: "Close",
-                        }).then(function () {
-                            window.location = "login.jsp";
-                        });
+                        // swal({
+                        //     title: "Success",
+                        //     text: "Hurray!! Password got reset",
+                        //     icon: "success",
+                        //     button: "Close",
+                        // }).then(function () {
+                        //     window.location = "login.jsp";
+                        // });
 
                     }
                 },
@@ -404,7 +399,7 @@
                     console.log(data);
                 }
             })
-            */
+
 
         });
     });
