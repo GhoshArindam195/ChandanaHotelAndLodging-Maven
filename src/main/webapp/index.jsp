@@ -294,7 +294,7 @@
                             <h4><label for="content">Write your Question or Review </label></h4>
                             <textarea class="form-control" id="content" name="content" rows="5" placeholder="Write Something Here..."></textarea>
                         </div>
-                        <center><button class="btn btn-info" id="submit_feedback" >Submit</button></center>
+                        <center><button type="button" class="btn btn-info" id="submit_feedback" >Submit</button></center>
                     </form>
                 </div>
             </div>
@@ -312,7 +312,7 @@
 <script src="javascript/translate.js"></script>
 <script src="javascript/lightbox-plus-jquery.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -360,21 +360,12 @@
                 'queryType' : queryType,
                 'content' : content
             };
-
             $.ajax({
-                url: "",
+                type: "POST",
+                url: "feedbackFromServlet",
                 data: d,
                 success: function (data, textStatus, jqXHR) {
-//                                                            alert(data)
-                    if (data.trim() === "not exist")
-                    {
-                        // swal({
-                        //     title: "Failed",
-                        //     text: "Email doesn't Exist!! Plase provide correct email.",
-                        //     icon: "error",
-                        //     button: "Close",
-                        // });
-                    } else if (data.trim() === "Failed")
+                    if (data.trim() === "Failed")
                     {
                         // swal({
                         //     title: "Failed",
@@ -382,6 +373,7 @@
                         //     icon: "error",
                         //     button: "Close",
                         // });
+                        alert("Feedback Saved Failed")
                     } else if (data.trim() === "Success")
                     {
                         // swal({
@@ -392,14 +384,13 @@
                         // }).then(function () {
                         //     window.location = "login.jsp";
                         // });
-
+                        alert("Feedback Saved Successfully")
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     console.log(data);
                 }
-            })
-
+            });
 
         });
     });
