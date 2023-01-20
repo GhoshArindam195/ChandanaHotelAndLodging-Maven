@@ -22,7 +22,7 @@
 </head>
 <body>
 <section class="top xyz" id="parallax">
-    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-*" style="background-color: rgba(0, 0, 0, 0.6);width: 100vw; backdrop-filter: blur(8px); position: fixed; cursor: pointer;">
+    <nav class="navbar navbar-expand-lg sticky-top navbar-dark bg-*" style="background-color: rgba(0, 0, 0, 0.6);width: 100%; backdrop-filter: blur(8px); position: fixed; cursor: pointer;">
         <a class="navbar-brand" href="index.jsp" style="font-family: 'Aileron', sans-serif; font-weight: 500;">Chandana Hotel & Lodging</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -265,34 +265,40 @@
                     </ul>
                 </div>
                 <div class="contact-form">
-                    <form data-aos="zoom-out">
+                    <form id="feedback-form" data-aos="zoom-out">
                         <div class="form-group">
                             <h4><label for="name">Name</label></h4>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name Surname">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Name Surname" >
+                            <p id="nameLabel" class="text-danger" style="text-align: left; display: none;">&nbsp;Required!</p>
                         </div>
                         <div class="form-group">
                             <h4><label for="from_email">Email address</label></h4>
                             <input type="email" class="form-control" id="from_email" name="from_email" placeholder="name@example.com">
+                            <p class="text-danger email-text" style="text-align: left; display: none;">&nbsp;Invalid Email</p>
+                            <p id="emailLabel" class="text-danger" style="text-align: left; display: none;">&nbsp;Required</p>
                         </div>
                         <div class="form-group">
                             <h4><label for="QueryType">Query Type</label></h4>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="QueryType" id="Query" value="query">
+                                <input class="form-check-input" type="radio" name="QueryType" id="Query" value="query" >
                                 <label class="form-check-label text-dark" for="Query">Query</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="QueryType" id="Review" value="review">
+                                <input class="form-check-input" type="radio" name="QueryType" id="Review" value="review" >
                                 <label class="form-check-label text-dark" for="Review">Review</label>
-                            </div>
+                            </div><br>
+                            <p id="queryTypeLabel" class="text-danger" style="text-align: left; display: none;">&nbsp;Required!</p>
                         </div>
                         <div class="form-group">
                             <h4><label for="subject">Subject</label></h4>
-                            <input type="subject" class="form-control" id="subject" name="subject" placeholder="Subject">
+                            <input type="subject" class="form-control" id="subject" name="subject" placeholder="Subject" >
+                            <p id="subjectLabel" class="text-danger" style="text-align: left; display: none;">&nbsp;Required!</p>
                         </div>
 
                         <div class="form-group">
                             <h4><label for="content">Write your Question or Review </label></h4>
-                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Write Something Here..."></textarea>
+                            <textarea class="form-control" id="content" name="content" rows="5" placeholder="Write Something Here..." ></textarea>
+                            <p id="contentLabel" class="text-danger" style="text-align: left; display: none;">&nbsp;Required!</p>
                         </div>
                         <center><button type="button" class="btn btn-info" id="submit_feedback" >Submit</button></center>
                     </form>
@@ -315,7 +321,8 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+<%--Sweet alert CDN--%>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
     AOS.init();
@@ -342,15 +349,78 @@
 
 
             let name = $('#name').val();
-            // alert(name)
+
             let from_email = $('#from_email').val();
-            // alert(from_email)
+
             let subject = $('#subject').val();
-            // alert(subject)
+
             let queryType = $('input[name="QueryType"]:checked').val();
-            // alert(queryType)
+
             let content = $('#content').val();
-            // alert(content)
+
+            // Data Validation
+            if(name=="" || name==null)
+            {
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+            else if(from_email=="" || from_email==null)
+            {
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+            else if(from_email.indexOf('@')<=0 || (from_email.charAt(from_email.length-4)!='.' && from_email.charAt(from_email.length-3) != '.'))
+            {
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+            else if(subject=="" || subject==null)
+            {
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+            else if(queryType=="No one selected" || queryType==null)
+            {
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+            else if(content=="No one selected" || content==null)
+            {
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
+
+
 
 
             const d = {
@@ -360,38 +430,49 @@
                 'queryType' : queryType,
                 'content' : content
             };
-            $.ajax({
-                type: "POST",
-                url: "feedbackFromServlet",
-                data: d,
-                success: function (data, textStatus, jqXHR) {
-                    if (data.trim() === "Failed")
-                    {
-                        // swal({
-                        //     title: "Failed",
-                        //     text: "Something Went Wrong!! Plase try gain after sometime.",
-                        //     icon: "error",
-                        //     button: "Close",
-                        // });
-                        alert("Feedback Saved Failed")
-                    } else if (data.trim() === "Success")
-                    {
-                        // swal({
-                        //     title: "Success",
-                        //     text: "Hurray!! Password got reset",
-                        //     icon: "success",
-                        //     button: "Close",
-                        // }).then(function () {
-                        //     window.location = "login.jsp";
-                        // });
-                        alert("Feedback Saved Successfully")
-                    }
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    console.log(data);
-                }
-            });
 
+            document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+            document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');
+            document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+            document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+            document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+            document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+
+                $.ajax({
+                    type: "POST",
+                    url: "feedbackFromServlet",
+                    data: d,
+                    success: function (data, textStatus, jqXHR) {
+                        if (data.trim() === "Failure") {
+                            $('#feedback-form').trigger('reset');
+                            swal({
+                                title: "Oops! Something went wrong",
+                                text: "Please try again!",
+                                icon: "error",
+                                button: "Close",
+                            });
+                        } else if (data.trim() === "query") {
+                            $('#feedback-form').trigger('reset');
+                            swal({
+                                title: "Thank you for your question",
+                                text: "We will get back to you as soon as possible",
+                                icon: "success",
+                                button: "Close",
+                            });
+                        } else if (data.trim() === "review") {
+                            $('#feedback-form').trigger('reset');
+                            swal({
+                                title: "Thank you for your feedback",
+                                text: "It will be taken into consideration",
+                                icon: "success",
+                                button: "Close",
+                            });
+                        }
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        console.log(data);
+                    }
+                });
         });
     });
 </script>

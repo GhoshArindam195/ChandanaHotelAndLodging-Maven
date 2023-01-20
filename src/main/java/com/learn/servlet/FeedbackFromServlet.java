@@ -29,7 +29,7 @@ public class FeedbackFromServlet extends HttpServlet {
         {
             if(FeedbackDAO.saveFeedback(feedback))
             {
-                out.println("Success");
+                out.println(queryType);
             }
             else
             {
