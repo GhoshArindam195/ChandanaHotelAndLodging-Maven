@@ -65,7 +65,7 @@
     <div class = "hero container-fluid" style="width: 100%">
         <center>
             <h1 data-aos="fade-out">Enjoy your stay with us</h1>
-            <p data-aos="zoom-out" style="font-family: 'Merriweather', serif;">15% off on our Deluxe room for a limited period of time</p><br>
+            <p class="offer" data-aos="zoom-out" style="font-family: 'Merriweather', serif; color: yellow">15% off on our Deluxe room for a limited period of time</p><br>
             <button type="button" class="btn btn-warning" data-aos="fade-right">Book Now</button>
         </center>
     </div>
@@ -389,6 +389,16 @@
                 document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
                 return;
             }
+            else if(queryType=="" || queryType==null)
+            {
+                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: initial;');
+                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
+                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
+                return;
+            }
             else if(subject=="" || subject==null)
             {
                 document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: initial;');
@@ -399,17 +409,7 @@
                 document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
                 return;
             }
-            else if(queryType=="No one selected" || queryType==null)
-            {
-                document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: initial;');
-                document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: none;');
-                document.querySelector('#subjectLabel').setAttribute('style', 'text-align: left; display: none;');
-                document.querySelector('#emailLabel').setAttribute('style', 'text-align: left; display: none;');
-                document.querySelector('#nameLabel').setAttribute('style', 'text-align: left; display: none;');
-                document.querySelector('.email-text').setAttribute('style', 'text-align: left; display: none;');
-                return;
-            }
-            else if(content=="No one selected" || content==null)
+            else if(content=="" || content==null)
             {
                 document.querySelector('#contentLabel').setAttribute('style', 'text-align: left; display: initial;');
                 document.querySelector('#queryTypeLabel').setAttribute('style', 'text-align: left; display: none;');

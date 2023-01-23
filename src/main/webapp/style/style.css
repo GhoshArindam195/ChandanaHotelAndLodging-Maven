@@ -5,6 +5,21 @@
     scroll-behavior: smooth;
     scroll-padding-top: var(--scroll-padding, 50px);
 }
+.offer{
+    animation: animate 1.5s infinite;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.9;
+    }
+    100%{
+        opacity: 0;
+    }
+}
 .hero{
     padding-top: 10%;
     padding-bottom: 18%;
@@ -24,8 +39,7 @@
 }
 
 .top{
-    background: rgba(0, 0, 0, 0.7) url("../img/front.jpeg");
-    background-repeat: no-repeat;
+    background: rgba(0, 0, 0, 0.7) url("../img/front.jpeg") no-repeat;
     background-size: cover;
     background-blend-mode: darken;
 
@@ -67,10 +81,8 @@
 .yciotp{
     padding-top: 10%;
     padding-bottom: 10%;
-    background: rgba(0, 0, 0, 0.7) url("../img/galary4.jpeg");
-    background-attachment: fixed;
     background-size: cover;
-    background-repeat: no-repeat;
+    background: rgba(0, 0, 0, 0.7) url("../img/galary4.jpeg") no-repeat fixed;
     background-blend-mode: darken;
 }
 .yciotp-text h1{
@@ -108,10 +120,7 @@
 }
 
 .card-deck div{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 3px;
-    margin-bottom: 3px;
+    margin: 3px auto;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -139,10 +148,8 @@
 
 .contact-us-bg{
 
-    background: rgba(0, 0, 0, 0.7) url("../img/top.jpeg");
-    background-attachment: fixed;
     background-size: cover;
-    background-repeat: no-repeat;
+    background: rgba(0, 0, 0, 0.7) url("../img/top.jpeg") no-repeat fixed;
     background-blend-mode: darken;
     padding-bottom: 1%;
 }
